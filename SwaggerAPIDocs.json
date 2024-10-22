@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.1",
     "info": {
-        "title": "OpenAPI definition",
+        "title": "Library Management System API Documentation",
         "version": "v0"
     },
     "servers": [
@@ -1393,7 +1393,7 @@
         "fine": 0.00,
         "password": "$2a$10$x3CRo0T56pn1RtX5.q1ByORXw5mNKXpAtpCnZbB1kfs7AOmP72op."
     }
-            } 
+            } , 
 },
 "UserAddResponse":
 {
