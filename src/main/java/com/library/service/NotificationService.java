@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.library.dao.InterfaceNotificationDAO;
-import com.library.dao.InterfaceUserDAO;
+import com.library.dao.Interfaces.InterfaceNotificationDAO;
+import com.library.dao.Interfaces.InterfaceUserDAO;
 import com.library.exception.UserNotFoundException;
 import com.library.model.Notification;
 import com.library.model.User;

@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.library.constants.StringConstants;
 import com.library.constants.UserConstants;
-import com.library.dao.InterfaceBookDAO;
-import com.library.dao.InterfaceBookIssueDAO;
-import com.library.dao.InterfaceUserDAO;
+import com.library.dao.Interfaces.InterfaceBookDAO;
+import com.library.dao.Interfaces.InterfaceBookIssueDAO;
+import com.library.dao.Interfaces.InterfaceUserDAO;
 import com.library.exception.BookNotFoundException;
 import com.library.exception.BookUnavailableException;
+import com.library.exception.GeneralException;
 import com.library.exception.IssueLimitExceededException;
 import com.library.exception.UserNotFoundException;
 import com.library.model.Book;
@@ -30,11 +31,12 @@ import com.library.model.User;
 import com.library.responseDTO.BookResponseDTO;
 import com.library.responseDTO.IssueBookResponseDTO;
 import com.library.responseDTO.ReturnBookResponseDTO;
+import com.library.service.Interfaces.InterfaceBookService;
 import com.library.util.IdGenerator;
 import com.library.util.LoggingUtil;
 
 @Service
-public class BookService {
+public class BookService implements InterfaceBookService{
 
 	private static final Logger logger = LoggingUtil.getLogger(BookService.class);
 
@@ -72,6 +74,20 @@ public class BookService {
 		return responseDTO;
 	}
 
+	public boolean deleteBook(String bookId) {
+		Book book = getBookById(bookId);
+		if(book == null) {
+			throw new BookNotFoundException(bookId);
+		}
+		
+		if (!Status.Available.toString().equalsIgnoreCase(book.getStatus().toString())) {
+			logger.log(Level.WARNING, StringConstants.BOOK_NOT_AVAILABLE);
+			throw new GeneralException("The book is currently issued cannot be deleted");
+		}
+		System.out.println(book);
+		return bookDAO.deleteBook(bookId);
+		
+	}
 	public Book getBookById(String bookId) {
 		return bookDAO.getBook(bookId);
 	}
@@ -222,6 +238,12 @@ public class BookService {
 	}
 
 	public List<IssuedBookDetails> getAllIssuedBookByUserName(String userName) {
+		
+		User user = userDAO.getUserByUserName(userName);
+		
+		if(user == null) {
+			throw new UserNotFoundException(userName);
+		}
 		
 		List<IssuedBookDetails> issuedBookDetails = getAllIssuedBooks(false);
 		if (issuedBookDetails.isEmpty()) {

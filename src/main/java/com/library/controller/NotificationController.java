@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.library.model.Notification;
 import com.library.requestDTO.SendNotificationRequestDTO;
 import com.library.responseDTO.ApiResponse;
@@ -19,7 +21,7 @@ import com.library.service.NotificationService;
 
 import jakarta.validation.Valid;
 
-@Controller
+@RestController
 @RequestMapping("/api")
 public class NotificationController {
 

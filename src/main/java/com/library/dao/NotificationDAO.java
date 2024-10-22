@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.library.constants.NotificationConstants;
+import com.library.dao.Interfaces.InterfaceNotificationDAO;
 import com.library.model.Notification;
 
 @Repository

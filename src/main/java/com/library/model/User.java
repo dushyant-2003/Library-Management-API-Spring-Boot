@@ -48,6 +48,7 @@ public class User {
 	
 	@NotNull(message = "Contact number cannot be null")
     @Size(min = 10, max = 10, message = "Contact number must be exactly 10 digits long")  
+	@Pattern(regexp = "^\\d{10}$", message = "Enter valid phone number")
 	private String contactNumber;
 	
 	@Email

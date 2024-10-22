@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.library.constants.BookConstants;
 import com.library.constants.UserConstants;
+import com.library.dao.Interfaces.InterfaceBookDAO;
 import com.library.model.Book;
 import com.library.model.BookIssued;
 import com.library.model.Gender;
@@ -53,7 +54,7 @@ public class BookDAO extends GenericDAO<Book> implements InterfaceBookDAO {
 	}
 
 	public Book getBook(String bookId) {
-		String sqlQueryGetBook = String.format("SELECT * from book where bookId = '%s'",bookId);
+		String sqlQueryGetBook = String.format("SELECT * from book where bookId = '%s'", bookId);
 		try {
 			return executeGetQuery(sqlQueryGetBook);
 		} catch (ClassNotFoundException | SQLException e) {
@@ -62,8 +63,8 @@ public class BookDAO extends GenericDAO<Book> implements InterfaceBookDAO {
 		}
 		return null;
 
-		
 	}
+
 	public boolean issueBook(BookIssued bookIssued) {
 		String insertBookIssueQuery = String.format(
 				"INSERT INTO BookIssued (issueId, userId, bookId, issueDate, deadline, status) VALUES ('%s','%s','%s','%s','%s','%s')",
@@ -118,4 +119,16 @@ public class BookDAO extends GenericDAO<Book> implements InterfaceBookDAO {
 		return books;
 	}
 
+	@Override
+	public boolean deleteBook(String bookId) {
+
+		String deleteSQL = "DELETE FROM BOOK WHERE bookId = \"" + bookId + "\"";
+		try {
+			return executeUpdateQuery(deleteSQL);
+		} catch (ClassNotFoundException | SQLException e) {
+
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

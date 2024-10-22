@@ -1,4 +1,4 @@
-package com.library.dao;
+package com.library.dao.Interfaces;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,4 +13,5 @@ public interface InterfaceBookDAO {
 	public void returnBook(String bookId, String userId, LocalDate returnDate);
 	public List<Book> getAllBooks();
 	public Book getBook(String bookId);
+	public boolean deleteBook(String bookId);
 }

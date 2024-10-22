@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.library.constants.UserConstants;
+import com.library.dao.Interfaces.InterfaceUserDAO;
 import com.library.model.Gender;
 import com.library.model.Role;
 import com.library.model.User;
@@ -73,10 +74,11 @@ public class UserDAO extends GenericDAO<User> implements InterfaceUserDAO {
 		return users;
 	}
 
-	public List<User> getAllUsers(String role,int pageNumber,int pageSize) {
+	public List<User> getAllUsers(String role, int pageNumber, int pageSize) {
 		List<User> users = new ArrayList<>();
 		int offset = (pageNumber - 1) * pageSize;
-		String selectAllSqlQuery = String.format("SELECT * FROM user where role = '%s' LIMIT %d OFFSET %d", role, pageSize, offset);
+		String selectAllSqlQuery = String.format("SELECT * FROM user where role = '%s' LIMIT %d OFFSET %d", role,
+				pageSize, offset);
 		try {
 			return executeGetAllQuery(selectAllSqlQuery);
 		} catch (ClassNotFoundException | SQLException e) {
@@ -115,6 +117,25 @@ public class UserDAO extends GenericDAO<User> implements InterfaceUserDAO {
 
 	}
 
+	public boolean updateUser(User user) {
+
+		String sqlQuery = String.format(
+				"UPDATE %s SET %s = '%s', %s = '%s', %s = '%s',"
+						+ " %s = '%s', %s = '%s', %s = '%s' WHERE %s = '%s'",
+				UserConstants.USER_TABLE_NAME, UserConstants.NAME_COLUMN, user.getName(),
+				UserConstants.CONTACT_NO_COLUMN, user.getContactNumber(), UserConstants.EMAIL_COLUMN, user.getEmail(),
+				UserConstants.DEPARTMENT_COLUMN, user.getDepartment(), UserConstants.DESIGNATION_COLUMN,
+				user.getDesignation(), UserConstants.PASSWORD_COLUMN, user.getPassword(), UserConstants.USER_ID_COLUMN,
+				user.getUserId());
+System.out.println(sqlQuery);
+		try {
+			return executeUpdateQuery(sqlQuery);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	public boolean updateUser(User user, String userId, String columnToUpdate) {
 
 		Map<String, Object> fieldMap = new HashMap<>();

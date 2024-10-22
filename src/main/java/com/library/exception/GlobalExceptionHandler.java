@@ -62,7 +62,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		ApiError apiError = new ApiError(LocalDateTime.now(), ex.getMessage(), ApiMessages.DUPLICATE_ENTRY);
 		return new ResponseEntity<>(apiError, HttpStatus.CONFLICT);
 	}
-
+	
+	@ExceptionHandler(GeneralException.class)
+	public final ResponseEntity<ApiError> handleGeneralExceptions(Exception ex, WebRequest request)
+			throws Exception {
+		ApiError errorDetails = new ApiError(LocalDateTime.now(), ex.getMessage(),
+				request.getDescription(false));
+		return new ResponseEntity<ApiError>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {

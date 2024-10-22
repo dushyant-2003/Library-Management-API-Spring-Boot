@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.library.constants.IssuedBookConstants;
+import com.library.dao.Interfaces.InterfaceBookIssueDAO;
 import com.library.model.IssuedBookDetails;
 
 

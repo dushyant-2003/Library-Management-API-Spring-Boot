@@ -1,0 +1,1671 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "OpenAPI definition",
+        "version": "v0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Generated server url"
+        }
+    ],
+    "paths": {
+        "/api/users/{userId}": {
+            "put": {
+                "tags": [
+                    "user-controller"
+                ],
+                "operationId": "updateUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserUpdateDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseString"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "user-controller"
+                ],
+                "operationId": "deleteUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseDeleteString"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "get": {
+                "tags": [
+                    "user-controller"
+                ],
+                "operationId": "getAllUsers",
+                "parameters": [
+                    {
+                        "name": "role",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "minimum": 0,
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 10
+                        }
+                    },
+                    {
+                        "name": "pageNumber",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "minimum": 1,
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseListUser"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "user-controller"
+                ],
+                "operationId": "addUser",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "CREATED",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserAddResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/notifications": {
+            "post": {
+                "tags": [
+                    "notification-controller"
+                ],
+                "operationId": "sendNotification",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SendNotificationRequestDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseSentNotificationString"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/books": {
+            "get": {
+                "tags": [
+                    "book-controller"
+                ],
+                "operationId": "getAllBooks",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseListBook"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "book-controller"
+                ],
+                "operationId": "addBook",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Book"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "CREATED",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseBookResponseDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/books/return": {
+            "post": {
+                "tags": [
+                    "book-controller"
+                ],
+                "operationId": "returnBook",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReturnBookRequestDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseReturnBookResponseDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/books/issue": {
+            "post": {
+                "tags": [
+                    "book-controller"
+                ],
+                "operationId": "issueBook",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/IssueBookRequestDTO"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseIssueBookResponseDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "auth-controller"
+                ],
+                "operationId": "logoutUser",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseLogout"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "auth-controller"
+                ],
+                "operationId": "login",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseAuthenticationResponseDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/{userName}": {
+            "get": {
+                "tags": [
+                    "user-controller"
+                ],
+                "operationId": "getUserByUserName",
+                "parameters": [
+                    {
+                        "name": "userName",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseUser"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/{userName}/notifications": {
+            "get": {
+                "tags": [
+                    "notification-controller"
+                ],
+                "operationId": "readNotifications",
+                "parameters": [
+                    {
+                        "name": "userName",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseListNotification"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/{userName}/issued-books": {
+            "get": {
+                "tags": [
+                    "book-controller"
+                ],
+                "operationId": "getAllIssuedBookByUserName",
+                "parameters": [
+                    {
+                        "name": "userName",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseListIssuedBookDetails"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/books/issued-books": {
+            "get": {
+                "tags": [
+                    "book-controller"
+                ],
+                "operationId": "getAllIssuedBook",
+                "parameters": [
+                    {
+                        "name": "seeDefaulterList",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/IssuedBookDetails"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/books/{bookId}": {
+            "delete": {
+                "tags": [
+                    "book-controller"
+                ],
+                "operationId": "deleteUser_1",
+                "parameters": [
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseString"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/**": {
+            "get": {
+                "tags": [
+                    "path-not-found-error-controller"
+                ],
+                "operationId": "handleUndefinedPaths",
+                "responses": {
+                    "404": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponsePageNotFound"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "path-not-found-error-controller"
+                ],
+                "operationId": "handleUndefinedPaths_3",
+                "responses": {
+                    "404": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponsePageNotFound"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "path-not-found-error-controller"
+                ],
+                "operationId": "handleUndefinedPaths_2",
+                "responses": {
+                    "404": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponsePageNotFound"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "path-not-found-error-controller"
+                ],
+                "operationId": "handleUndefinedPaths_5",
+                "responses": {
+                    "404": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponsePageNotFound"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "options": {
+                "tags": [
+                    "path-not-found-error-controller"
+                ],
+                "operationId": "handleUndefinedPaths_6",
+                "responses": {
+                    "404": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponsePageNotFound"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "head": {
+                "tags": [
+                    "path-not-found-error-controller"
+                ],
+                "operationId": "handleUndefinedPaths_1",
+                "responses": {
+                    "404": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponsePageNotFound"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "path-not-found-error-controller"
+                ],
+                "operationId": "handleUndefinedPaths_4",
+                "responses": {
+                    "404": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponsePageNotFound"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "UserUpdateDTO": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "contactNumber": {
+                        "maxLength": 10,
+                        "minLength": 10,
+                        "pattern": "^\\d{10}$",
+                        "type": "string"
+                    },
+                    "department": {
+                        "type": "string"
+                    },
+                    "designation": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "maxLength": 2147483647,
+                        "minLength": 8,
+                        "pattern": "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$",
+                        "type": "string"
+                    }
+                },
+                "example":{
+    
+    "department": "Library",
+    "email": "updatedEmail@gmail.com",
+    "password": "User@123"
+
+}
+            },
+            "ApiResponseString": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "SUCCESS",
+                            "FAILURE",
+                            "ERROR"
+                        ]
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "string"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalPage": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }, "example" : {
+    "status": "SUCCESS",
+    "message": "User updated successfully"
+}
+            },
+             "ApiResponseLogout": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "SUCCESS",
+                            "FAILURE",
+                            "ERROR"
+                        ]
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "string"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalPage": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }, "example" :{
+    "status": "SUCCESS",
+    "message": "Logged out successfully"
+}
+            },
+                        "ApiResponseDeleteString": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "SUCCESS",
+                            "FAILURE",
+                            "ERROR"
+                        ]
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "string"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalPage": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }, "example" : {
+    "status": "SUCCESS",
+    "message": "User deleted successfully"
+}
+            },
+             "ApiResponsePageNotFound": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "SUCCESS",
+                            "FAILURE",
+                            "ERROR"
+                        ]
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "string"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalPage": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }, "example" :{
+    "status": "FAILURE",
+    "message": "Page not found"
+}
+            },
+             "ApiResponseSentNotificationString": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "SUCCESS",
+                            "FAILURE",
+                            "ERROR"
+                        ]
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "string"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalPage": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }, "example" : {
+    "status": "SUCCESS",
+    "message": "Notification sent successfully"
+}
+            },
+            "User": {
+                "required": [
+                    "contactNumber",
+                    "gender",
+                    "name",
+                    "password",
+                    "role",
+                    "userName"
+                ],
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "userName": {
+                        "maxLength": 2147483647,
+                        "minLength": 4,
+                        "type": "string"
+                    },
+                    "role": {
+                        "type": "string",
+                        "enum": [
+                            "ADMIN",
+                            "STAFF",
+                            "ISSUER"
+                        ]
+                    },
+                    "gender": {
+                        "type": "string",
+                        "enum": [
+                            "MALE",
+                            "FEMALE",
+                            "OTHER"
+                        ]
+                    },
+                    "dateOfBirth": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "department": {
+                        "type": "string"
+                    },
+                    "designation": {
+                        "type": "string"
+                    },
+                    "contactNumber": {
+                        "maxLength": 10,
+                        "minLength": 10,
+                        "pattern": "^\\d{10}$",
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "bookIssueLimit": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "fine": {
+                        "type": "number"
+                    },
+                    "password": {
+                        "maxLength": 2147483647,
+                        "minLength": 8,
+                        "pattern": "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$",
+                        "type": "string"
+                    }
+                },
+                "example":{
+    "name": "Aman",
+    "userName": "Aman@123",
+    "role": "ISSUER",
+    "gender": "MALE",
+    "dateOfBirth": "2003-01-04",
+    "department": "CSE",
+    "designation": "Student",
+    "contactNumber": "9922000220",
+    "email": "aman@123gmail.com",
+    "address": "Bhilwara",
+    "password": "User@123"
+}
+            
+}
+            ,
+            "SendNotificationRequestDTO": {
+                "required": [
+                    "message",
+                    "title",
+                    "userName"
+                ],
+                "type": "object",
+                "properties": {
+                    "userName": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "example":{
+    "userName":"Username",
+    "title":"Notification Title",
+    "message":"Notification Description"
+}
+            },
+            "Book": {
+                "required": [
+                    "author",
+                    "name",
+                    "price"
+                ],
+                "type": "object",
+                "properties": {
+                    "bookId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "author": {
+                        "type": "string"
+                    },
+                    "publication": {
+                        "type": "string"
+                    },
+                    "edition": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "shelfLocation": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "Issued",
+                            "Available",
+                            "Lost"
+                        ]
+                    }
+                }, "example":{
+    "name":"One piece 1",
+    "author": "Oda",
+    "publication":"Universities Press",
+    "edition":"2",
+    "price":1200
+}
+            },
+            "ApiResponseBookResponseDTO": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "SUCCESS",
+                            "FAILURE",
+                            "ERROR"
+                        ]
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/BookResponseDTO"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalPage": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }, "example" :{
+    "status": "SUCCESS",
+    "message": "Book added successfully",
+    "data": {
+        "bookId": "B58b0bd9",
+        "name": "One piece 1",
+        "price": 1200
+    }
+}
+            },
+            "BookResponseDTO": {
+                "type": "object",
+                "properties": {
+                    "bookId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "ReturnBookRequestDTO": {
+                "required": [
+                    "bookId",
+                    "userId"
+                ],
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "string"
+                    },
+                    "bookId": {
+                        "type": "string"
+                    },
+                    "bookLostStatus": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "ApiResponseReturnBookResponseDTO": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "SUCCESS",
+                            "FAILURE",
+                            "ERROR"
+                        ]
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/ReturnBookResponseDTO"
+                    }
+                }
+            },
+            "ReturnBookResponseDTO": {
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "string"
+                    },
+                    "bookId": {
+                        "type": "string"
+                    },
+                    "issueDate": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "deadline": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "returnDate": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "fine": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }, "example" : {
+    "status": "SUCCESS",
+    "message": "Book returned successfully",
+    "data": {
+        "userId": "U7fcd7fa",
+        "bookId": "B58b0bd9",
+        "issueDate": "2024-10-21",
+        "deadline": "2024-11-05",
+        "returnDate": "2024-10-21",
+        "fine": 0,
+        "message": "Book returned successfully"
+    }
+}
+                
+            },
+            "IssueBookRequestDTO": {
+                "required": [
+                    "bookId",
+                    "userId"
+                ],
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "string"
+                    },
+                    "bookId": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ApiResponseIssueBookResponseDTO": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "SUCCESS",
+                            "FAILURE",
+                            "ERROR"
+                        ]
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/IssueBookResponseDTO"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalPage": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "example":{
+    "status": "SUCCESS",
+    "message": "Book issued successfully",
+    "data": {
+        "userId": "U7fcd7fa",
+        "bookId": "B58b0bd9",
+        "issueDate": "2024-10-21",
+        "deadline": "2024-11-05",
+        "message": "Book issued successfully"
+    }
+}
+            },
+            "IssueBookResponseDTO": {
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "string"
+                    },
+                    "bookId": {
+                        "type": "string"
+                    },
+                    "issueDate": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "deadline": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "example" : 
+            },
+            "ApiResponseAuthenticationResponseDTO": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "SUCCESS",
+                            "FAILURE",
+                            "ERROR"
+                        ]
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/AuthenticationResponseDTO"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalPage": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }, "example" :{
+    "status": "SUCCESS",
+    "message": "User logged in successfully",
+    "data": {
+        "jwtToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9BRE1JTiIsInN1YiI6IkR1c2h5YW50MTIzIiwiaWF0IjoxNzI5NTMyMDg5LCJleHAiOjE3Mjk1NjA4ODl9.uZjFmxGi1AwV9qkeI1qktdVxlXI3bjbcA3CSpdg9p0g",
+        "username": "Dushyant123"
+    }
+}
+            },
+            "AuthenticationResponseDTO": {
+                "type": "object",
+                "properties": {
+                    "jwtToken": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ApiResponseListUser": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "SUCCESS",
+                            "FAILURE",
+                            "ERROR"
+                        ]
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/User"
+                        }
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalPage": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "ApiResponseUser": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "SUCCESS",
+                            "FAILURE",
+                            "ERROR"
+                        ]
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                     "$ref": "#/components/schemas/User"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalPage": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "example":{
+    "status": "SUCCESS",
+    "message": "User retrieved successfully",
+    "data": {
+        "userId": "U7fcd7fa",
+        "name": "Aman",
+        "userName": "Aman@123",
+        "role": "ISSUER",
+        "gender": "MALE",
+        "dateOfBirth": "2003-01-04",
+        "department": "Library",
+        "designation": "Student",
+        "contactNumber": "9922000220",
+        "email": "Ettie.Macejkovic25@gmail.com",
+        "address": "Bhilwara",
+        "bookIssueLimit": 3,
+        "fine": 0.00,
+        "password": "$2a$10$x3CRo0T56pn1RtX5.q1ByORXw5mNKXpAtpCnZbB1kfs7AOmP72op."
+    }
+            } 
+},
+"UserAddResponse":
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["SUCCESS", "FAILURE"]
+    },
+    "message": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        }
+      },
+      "required": ["userId", "userName", "name", "email"]
+    }
+  },
+  "required": ["status", "message", "data"]
+  , "example":{
+    "status": "SUCCESS",
+    "message": "User added successfully",
+    "data": {
+        "userId": "U7fcd7fa",
+        "userName": "Aman@123",
+        "name": "Aman",
+        "email": "aman@123gmail.com"
+    }
+}
+},
+            "ApiResponseListNotification": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "SUCCESS",
+                            "FAILURE",
+                            "ERROR"
+                        ]
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Notification"
+                        }
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalPage": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+                ,"example":{
+    "status": "SUCCESS",
+    "message": "Notification retreived successfully",
+    "data": [
+        {
+            "notificationId": "N29f6592",
+            "userId": "U7fcd7fa",
+            "title": "Notification Title",
+            "message": "Notification Description",
+            "date": "2024-10-21"
+        },
+        {
+            "notificationId": "N845d57e",
+            "userId": "U7fcd7fa",
+            "title": "Welcome",
+            "message": "Hi Aman",
+            "date": "2024-10-21"
+        }
+    ]
+}
+            },
+            "Notification": {
+                "type": "object",
+                "properties": {
+                    "notificationId": {
+                        "type": "string"
+                    },
+                    "userId": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date"
+                    }
+                }
+            },
+            "ApiResponseListIssuedBookDetails": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "SUCCESS",
+                            "FAILURE",
+                            "ERROR"
+                        ]
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/IssuedBookDetails"
+                        }
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalPage": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }, "example" :{
+    "status": "SUCCESS",
+    "message": "Books fetched succesfully",
+    "data": [
+        {
+            "userId": "U574b13d",
+            "userName": "Palak@123",
+            "bookId": "254d0b76",
+            "issuerName": "Palak",
+            "email": "palak@gmail.com",
+            "bookName": "Forouzan",
+            "author": "Behrouz",
+            "price": 800.0,
+            "issueDate": "2024-09-20",
+            "deadline": "2024-10-05",
+            "fine": 34.0
+        },
+        {
+            "userId": "U574b13d",
+            "userName": "Palak@123",
+            "bookId": "05fa8b6d",
+            "issuerName": "Palak",
+            "email": "palak@gmail.com",
+            "bookName": "Mathematics Class XII",
+            "author": "RD Sharma",
+            "price": 1100.0,
+            "issueDate": "2024-09-20",
+            "deadline": "2024-10-05",
+            "fine": 34.0
+        }
+    ]
+}
+            },
+            "IssuedBookDetails": {
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "string"
+                    },
+                    "userName": {
+                        "type": "string"
+                    },
+                    "bookId": {
+                        "type": "string"
+                    },
+                    "issuerName": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "bookName": {
+                        "type": "string"
+                    },
+                    "author": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "issueDate": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "deadline": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "fine": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "ApiResponseListBook": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "SUCCESS",
+                            "FAILURE",
+                            "ERROR"
+                        ]
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Book"
+                        }
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalPage": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            }
+        }
+    }
+}

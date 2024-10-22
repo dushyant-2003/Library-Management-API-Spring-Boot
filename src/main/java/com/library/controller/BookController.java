@@ -1,11 +1,9 @@
 package com.library.controller;
 
 import java.util.List;
-import java.util.Scanner;
-
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.library.constants.StringConstants;
 import com.library.model.Book;
 import com.library.model.IssuedBookDetails;
 import com.library.model.User;
@@ -55,13 +52,29 @@ public class BookController {
 		if (responseDTO != null) {
 			ApiResponse<BookResponseDTO> response = ApiResponse.<BookResponseDTO>builder().status(Status.SUCCESS)
 					.message("Book added successfully").data(responseDTO).build();
-			return ResponseEntity.ok(response);
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
 		}
 		ApiResponse<BookResponseDTO> errorResponse = ApiResponse.<BookResponseDTO>builder().status(Status.ERROR)
 				.message("Failed to add book").build();
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 	}
 
+	@DeleteMapping("/books/{bookId}")
+	public ResponseEntity<ApiResponse<String>> deleteUser(@PathVariable String bookId) {
+
+		boolean bookDeletionStatus = bookService.deleteBook(bookId);
+
+		if (bookDeletionStatus) {
+			ApiResponse<String> response = ApiResponse.<String>builder().status(Status.SUCCESS)
+					.message("Book deleted successfully").build();
+			return ResponseEntity.ok(response);
+		}
+
+		ApiResponse<String> response = ApiResponse.<String>builder().status(Status.FAILURE).message("Book not found")
+				.build();
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+	}
+	
 	@PostMapping("/books/issue")
 	public ResponseEntity<ApiResponse<IssueBookResponseDTO>> issueBook(
 			@Valid @RequestBody IssueBookRequestDTO issueBookRequestDTO) {
